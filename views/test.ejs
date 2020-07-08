@@ -13,6 +13,16 @@
             var userId = $("#userId").val();
             var userPassword = $("#userPassword").val();
             console.log(userId, userPassword);
+            $.ajax({
+                url:'/ajaxTest',
+                type : 'POST',
+                data : {
+                },
+                success:function(response){
+                    console.log(response)
+                }
+            })
+
         })
     </script>
 </html>

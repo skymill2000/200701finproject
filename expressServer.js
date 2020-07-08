@@ -12,6 +12,10 @@ app.get("/ejsTest", function (req, res) {
   res.render("test");
 });
 
+app.post("/ajaxTest", function (req, res) {
+  res.json("로그인에 성공하셨습니다.");
+});
+
 app.get("/addRouter", function (req, res) {
   console.log("router working");
   res.send("<html><h1>안녕하세요 html 코드입니다. </h1></html>");
