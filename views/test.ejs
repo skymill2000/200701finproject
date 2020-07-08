@@ -17,6 +17,8 @@
                 url:'/ajaxTest',
                 type : 'POST',
                 data : {
+                    sendUserId : userId,
+                    sendUserPassword : userPassword
                 },
                 success:function(response){
                     console.log(response)
