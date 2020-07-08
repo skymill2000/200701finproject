@@ -7,6 +7,8 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(express.static(path.join(__dirname, "public"))); //to use static asset
+
 app.get("/", function (req, res) {
   res.send("Hello World");
 });
