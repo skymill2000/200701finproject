@@ -168,7 +168,7 @@
          		   userPassword: userPassword,
           		},
           		success: function (data) {
-					console.log(data);
+					sessionStorage.setItem('ourToken', data);
             	}
         	});
         })

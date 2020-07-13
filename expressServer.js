@@ -3,6 +3,8 @@ const app = express();
 const path = require("path");
 const request = require("request");
 var mysql = require("mysql");
+const jwt = require("jsonwebtoken");
+
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -106,7 +108,23 @@ app.post("/login", function (req, res) {
         var dbPassword = results[0].password;
         console.log("db 에서 가져온 패스워드", dbPassword);
         if (userPassword == dbPassword) {
-          res.json("로그인 성공");
+          var tokenKey = "f@i#n%tne#ckfhlafkd0102test!@#%";
+          jwt.sign(
+            {
+              userId: results[0].id,
+              userEmail: results[0].email,
+            },
+            tokenKey,
+            {
+              expiresIn: "10d",
+              issuer: "fintech.admin",
+              subject: "user.login.info",
+            },
+            function (err, token) {
+              console.log("로그인 성공", token);
+              res.json(token);
+            }
+          );
         } else {
           res.json("비밀번호가 다릅니다");
         }
