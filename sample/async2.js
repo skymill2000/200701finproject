@@ -26,3 +26,13 @@ aFunc(function () {
     cFunc(function () {});
   });
 });
+
+var option = {
+  method : "POST",
+  url : "",
+  headers : {
+    'Content-Type' : 'application/x-www-form-urlencoded'
+  },
+  form : {
+  }
+}
