@@ -112,40 +112,27 @@
 				<div class="container">
 					<div class="form-divider"></div>
 
-					<div class="form-row">
-						<a href="javascript:void(0);" class="button circle block blue mb-15"> <i class="fa fa-facebook"></i> Login with FACEBOOK</a>
-					</div>
-					<div class="form-row">	
-						<a href="javascript:void(0);" class="button circle block red"><i class="fa fa-google"></i> Login with GOOGLE</a>
-					</div>
-
-					<div class="form-divider"></div>
-					<div class="form-label-divider"><span>OR</span></div>
 					<div class="form-divider"></div>
 
 					<div class="form-row-group with-icons">
 						<div class="form-row no-padding">
 							<i class="fa fa-envelope"></i>
-							<input type="email" name="aaa" class="form-element" placeholder="Username or Email">
+							<input type="email" id="userEmail" name="aaa" class="form-element" placeholder="Username or Email">
 						</div>
 						<div class="form-row no-padding">
 							<i class="fa fa-lock"></i>
-							<input type="password" name="aaa" class="form-element" placeholder="Password">
+							<input type="password" id="userPassword" name="aaa" class="form-element" placeholder="Password">
 						</div>
-					</div>
-
-					<div class="form-row txt-center mt-15">
-						<a href="forgot-password.html" data-loader="show">Forgot password?</a>
 					</div>
 
 					<div class="form-divider"></div>
 
 					<div class="form-row">
-						<a href="Javascript:void(0);" class="button circle block orange">Login</a>
+						<button type="button" id="loginBtn" class="button circle block orange">Login</a>
 					</div>
 
 					<div class="form-row txt-center mt-15">
-						Don't you have an account yet? <a href="signup.html" data-loader="show">Sign Up</a>
+						Don't you have an account yet? <a href="/signup">Sign Up</a>
 					</div>
 
 				</div>
@@ -169,7 +156,10 @@
 
 	<!-- Template global script file. requared all pages -->
 	<script src="js/global.script.js"></script>
-
+    <script>
+        $("#loginBtn").click(function(){
+        })
+    </script>
 	
 </body>
 
