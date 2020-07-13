@@ -35,7 +35,14 @@ app.get("/authResult", function (req, res) {
     },
   };
   request(option, function (error, response, body) {
-    console.log(body);
+    if (error) {
+      console.error(error);
+      throw error;
+    } else {
+      var accessRequestResult = JSON.parse(body);
+      console.log(accessRequestResult);
+      res.render("resultChild", { data: accessRequestResult });
+    }
   });
 });
 
