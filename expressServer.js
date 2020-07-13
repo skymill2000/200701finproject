@@ -18,6 +18,10 @@ app.get("/ejsTest", function (req, res) {
   res.render("test");
 });
 
+app.get("/designTest", function (req, res) {
+  res.render("designSample.ejs");
+});
+
 app.post("/ajaxTest", function (req, res) {
   var userId = req.body.sendUserId;
   var userPassword = req.body.sendUserPassword;
