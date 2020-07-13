@@ -27,6 +27,7 @@ app.get("/authResult", function (req, res) {
     //form 형태는 form / 쿼리스트링 형태는 qs / json 형태는 json ***
     form: {
       code: authCode,
+      //#자기 키로 시크릿 변경
       client_id: "q7kH44ThJwjpvNRg0BbJvE1yxvx5X53DKz1rNgPF",
       client_secret: "yVT6irMr2h4ZTHzZY7sDpbvhm1nlOzr4nP7DYRVy",
       redirect_uri: "http://localhost:3000/authResult",
