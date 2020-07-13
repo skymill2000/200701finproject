@@ -92,4 +92,27 @@ app.post("/signup", function (req, res) {
   );
 });
 
+app.post("/login", function (req, res) {
+  console.log(req.body);
+  var userEmail = req.body.userEmail;
+  var userPassword = req.body.userPassword;
+  var sql = "SELECT * FROM user WHERE email = ?";
+  connection.query(sql, [userEmail], function (error, results) {
+    if (error) throw error;
+    else {
+      if (results.length == 0) {
+        res.json("등록되지 않은 회원입니다.");
+      } else {
+        var dbPassword = results[0].password;
+        console.log("db 에서 가져온 패스워드", dbPassword);
+        if (userPassword == dbPassword) {
+          res.json("로그인 성공");
+        } else {
+          res.json("비밀번호가 다릅니다");
+        }
+      }
+    }
+  });
+});
+
 app.listen(3000);
