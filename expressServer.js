@@ -46,4 +46,8 @@ app.get("/authResult", function (req, res) {
   });
 });
 
+app.post("/signup", function (req, res) {
+  console.log(req.body);
+});
+
 app.listen(3000);
