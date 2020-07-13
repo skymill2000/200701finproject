@@ -4,9 +4,9 @@ const path = require("path");
 const request = require("request");
 var mysql = require("mysql");
 const jwt = require("jsonwebtoken");
+const auth = require("./lib/auth");
 
 var connection = mysql.createConnection({
-  host: "localhost",
   user: "root",
   password: "1q2w3e4r",
   database: "fintech",
@@ -29,6 +29,14 @@ app.get("/signup", function (req, res) {
 
 app.get("/login", function (req, res) {
   res.render("login");
+});
+
+app.get("/authTest", auth, function (req, res) {
+  res.json("로그인이 완료된 사용자가 보는 화면");
+});
+
+app.get("/main", function (req, res) {
+  res.render("main");
 });
 
 //------------------view / login-----------------
@@ -129,6 +137,30 @@ app.post("/login", function (req, res) {
           res.json("비밀번호가 다릅니다");
         }
       }
+    }
+  });
+});
+
+app.post("/list", function (req, res) {
+  //request 계좌 목록 조회 요청 만들기 request 모듈 활용
+  //res.json(aPI 결과 body 객체)
+  var option = {
+    method: "",
+    url: "",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    //form 형태는 form / 쿼리스트링 형태는 qs / json 형태는 json ***
+    form: {},
+  };
+  request(option, function (error, response, body) {
+    if (error) {
+      console.error(error);
+      throw error;
+    } else {
+      var resultJson = JSON.parse(body);
+      console.log(resultJson);
+      res.json(resultJson);
     }
   });
 });

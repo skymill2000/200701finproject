@@ -168,7 +168,8 @@
          		   userPassword: userPassword,
           		},
           		success: function (data) {
-					sessionStorage.setItem('ourToken', data);
+					sessionStorage.setItem('ourtoken', data);
+					window.location.href = "/main";
             	}
         	});
         })
