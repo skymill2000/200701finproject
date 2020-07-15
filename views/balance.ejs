@@ -212,7 +212,17 @@
             <div id="balanceText">
               <h1 id="balanceAmount"></h1>
             </div>
-            <div id="transactionList"></div>
+            <div id="transactionList">
+              <table>
+                <thead>
+                  <th>거래번호</th>
+                  <th>거래일자</th>
+                  <th>거래내역</th>
+                  <th>거래금액</th>
+                </thead>
+                <tbody id="transactionTable"></tbody>
+              </table>
+            </div>
           </div>
 
           <div class="form-divider"></div>
@@ -295,7 +305,25 @@
           fin_use_num: qs.fin_use_num,
         },
         success: function (data) {
-          console.log("거래내역", data.balance_amt);
+          console.log("거래내역", data);
+          var transactionList = data.res_list;
+          for (var i = 0; i < transactionList.length; i++) {
+            var transactionElement = transactionList[i];
+            $("#transactionTable").append(
+              "<tr><td>" +
+                (i + 1) +
+                "</td>" +
+                "<td>" +
+                transactionElement.tran_time +
+                "</td>" +
+                "<td>" +
+                transactionElement.print_content +
+                "</td>" +
+                "<td>" +
+                transactionElement.tran_amt +
+                "</td></tr>"
+            );
+          }
         },
       });
     </script>

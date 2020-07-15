@@ -221,4 +221,48 @@ app.post("/balance", auth, function (req, res) {
   });
 });
 
+app.post("/transactionList", auth, function (req, res) {
+  var userId = req.decoded.userId;
+  var fin_use_num = req.body.fin_use_num;
+  console.log("받아온 데이터", userId, fin_use_num);
+
+  var sql = "SELECT * FROM user WHERE id = ?";
+
+  var countnum = Math.floor(Math.random() * 1000000000) + 1;
+  var transId = "T991599190U" + countnum; //이용기과번호 본인것 입력
+
+  connection.query(sql, [userId], function (err, result) {
+    if (err) {
+      console.error(err);
+      throw err;
+    } else {
+      var option = {
+        method: "GET",
+        url:
+          "https://testapi.openbanking.or.kr/v2.0/account/transaction_list/fin_num",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + result[0].accesstoken,
+        },
+        //form 형태는 form / 쿼리스트링 형태는 qs / json 형태는 json ***
+        qs: {
+          bank_tran_id: transId,
+          fintech_use_num: fin_use_num,
+          inquiry_type: "A",
+          inquiry_base: "D",
+          from_date: "20190101",
+          to_date: "20190101",
+          sort_order: "D",
+          tran_dtime: "20200715114100",
+        },
+      };
+      request(option, function (err, response, body) {
+        console.log(body);
+        var transactionResult = JSON.parse(body);
+        res.json(transactionResult);
+      });
+    }
+  });
+});
+
 app.listen(3000);
