@@ -40,6 +40,10 @@ app.get("/main", function (req, res) {
   res.render("main");
 });
 
+app.get("/balance", function (req, res) {
+  res.render("balance");
+});
+
 //------------------view / login-----------------
 
 app.get("/authResult", function (req, res) {
@@ -146,7 +150,6 @@ app.post("/list", auth, function (req, res) {
   var userId = req.decoded.userId;
   //request 계좌 목록 조회 요청 만들기 request 모듈 활용
   //res.json(aPI 결과 body 객체)
-
   var sql = "SELECT * FROM user WHERE id = ?";
   connection.query(sql, [userId], function (error, results) {
     if (error) {
