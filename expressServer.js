@@ -183,4 +183,32 @@ app.post("/list", auth, function (req, res) {
   });
 });
 
+app.post("/balance", auth, function (req, res) {
+  var userId = req.decoded.userId;
+  var fin_use_num = req.body.fin_use_num;
+  console.log("받아온 데이터", userId, fin_use_num);
+  var sql = "SELECT * FROM user WHERE id = ?";
+  connection.query(sql, [userId], function (err, result) {
+    if (err) {
+      console.error(err);
+      throw err;
+    } else {
+      console.log("밸런스 받아온 데이베이스 값 : ", result);
+      var option = {
+        method: "",
+        url: "",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + results[0].accesstoken,
+        },
+        //form 형태는 form / 쿼리스트링 형태는 qs / json 형태는 json ***
+        qs: {},
+      };
+      request(option, function (err, response, body) {
+        console.log(body);
+      });
+    }
+  });
+});
+
 app.listen(3000);

@@ -266,7 +266,9 @@
         return b;
       }
       var qs = getQueryStringObject();
+
       var jwtToken = sessionStorage.getItem("ourtoken");
+
       console.log(qs, jwtToken);
       $.ajax({
         url: "http://localhost:3000/balance",
