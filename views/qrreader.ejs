@@ -211,6 +211,7 @@
           <div class="container">
             <div class="form-divider"></div>
           </div>
+          <video id="preview"></video>
 
           <div class="form-divider"></div>
 
@@ -252,7 +253,25 @@
 
     <!-- Template global script file. requared all pages -->
     <script src="js/global.script.js"></script>
-    <script src="js/qrcode.js"></script>
-    <script></script>
+    <script type="text/javascript" src="js/instascan.min.js"></script>
+    <script>
+      let scanner = new Instascan.Scanner({
+        video: document.getElementById("preview"),
+      });
+      scanner.addListener("scan", function (content) {
+        console.log(content);
+      });
+      Instascan.Camera.getCameras()
+        .then(function (cameras) {
+          if (cameras.length > 0) {
+            scanner.start(cameras[0]);
+          } else {
+            console.error("No cameras found.");
+          }
+        })
+        .catch(function (e) {
+          console.error(e);
+        });
+    </script>
   </body>
 </html>
