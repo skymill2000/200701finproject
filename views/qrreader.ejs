@@ -302,23 +302,24 @@
           success: function (data) {
             console.log(data.res_list);
             for (var i = 0; i < data.res_list.length; i++) {
-              $("#cardList").append();
+              var element = data.res_list[i];
+              $("#cardList").append(
+                "<tr><td>" +
+                  (i + 1) +
+                  "</td>" +
+                  "<td>" +
+                  element.account_alias +
+                  "</td>" +
+                  "<td>" +
+                  "<button onclick=\"pay('" +
+                  element.fintech_use_num +
+                  "')\">결제하기</button>" +
+                  "</td>" +
+                  "</tr>"
+              );
             }
           },
         });
-        // $.ajax({
-        //   url: "http://localhost:3000/withdraw",
-        //   type: "POST",
-        //   headers: {
-        //     ourtoken: jwtToken,
-        //   },
-        //   data: {
-        //     fin_use_num: content,
-        //   },
-        //   success: function (data) {
-        //     console.log(data);
-        //   },
-        // });
       });
       Instascan.Camera.getCameras()
         .then(function (cameras) {
@@ -331,6 +332,24 @@
         .catch(function (e) {
           console.error(e);
         });
+
+      function pay(finusenum) {
+        console.log(finusenum + "");
+        $.ajax({
+          url: "http://localhost:3000/withdraw",
+          type: "POST",
+          headers: {
+            ourtoken: jwtToken,
+          },
+          data: {
+            fin_use_num: finusenum,
+            amount: $("#amountInput").val(),
+          },
+          success: function (data) {
+            console.log(data);
+          },
+        });
+      }
     </script>
   </body>
 </html>

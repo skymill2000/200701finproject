@@ -276,6 +276,7 @@ app.post("/transactionList", auth, function (req, res) {
 app.post("/withdraw", auth, function (req, res) {
   var userId = req.decoded.userId;
   var fin_use_num = req.body.fin_use_num;
+  var amount = req.body.amount;
   console.log("받아온 데이터", userId, fin_use_num);
 
   var sql = "SELECT * FROM user WHERE id = ?";
@@ -301,9 +302,9 @@ app.post("/withdraw", auth, function (req, res) {
           cntr_account_type: "N",
           cntr_account_num: "7832932596",
           dps_print_content: "쇼핑몰환불",
-          fintech_use_num: "199159919057870971744807",
+          fintech_use_num: fin_use_num,
           wd_print_content: "오픈뱅킹출금",
-          tran_amt: "1000",
+          tran_amt: amount,
           tran_dtime: "20200720114100",
           req_client_name: "홍길동",
           req_client_num: "HONGGILDONG1234",
