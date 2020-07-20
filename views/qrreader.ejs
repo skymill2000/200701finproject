@@ -236,6 +236,22 @@
           </footer>
         </main>
         <!-- Page content end -->
+        <div class="popup-overlay" id="largePopup">
+          <!-- if you dont want overlay add class .no-overlay -->
+          <div class="popup-container">
+            <div class="popup-header">
+              <h3 class="popup-title">Large Popup</h3>
+              <span class="popup-close" data-dismiss="true"
+                ><i class="fa fa-times"></i
+              ></span>
+            </div>
+            <div class="popup-content"></div>
+            <div class="popup-footer">
+              <button class="button orange">Save</button>
+              <button class="button" data-dismiss="true">Cancel</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -262,6 +278,7 @@
 
       scanner.addListener("scan", function (content) {
         console.log(content);
+        $("#largePopup").show();
         $.ajax({
           url: "http://localhost:3000/withdraw",
           type: "POST",
