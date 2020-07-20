@@ -212,6 +212,9 @@
             <div class="form-divider"></div>
           </div>
           <video id="preview"></video>
+          <button class="button circle darkblue block" data-popup="largePopup">
+            Large Popup
+          </button>
 
           <div class="form-divider"></div>
 
@@ -245,7 +248,18 @@
                 ><i class="fa fa-times"></i
               ></span>
             </div>
-            <div class="popup-content"></div>
+            <div class="popup-content">
+              금액을 입력해 주세요 : <input type="text" id="amountInput" />
+              <table>
+                <thead>
+                  <th>번호</th>
+                  <th>계좌별명</th>
+                  <th>결제하기</th>
+                </thead>
+                <tbody id="cardList"></tbody>
+              </table>
+              <!-- #todo 리스트 테이블 만들기 -->
+            </div>
             <div class="popup-footer">
               <button class="button orange">Save</button>
               <button class="button" data-dismiss="true">Cancel</button>
@@ -280,18 +294,31 @@
         console.log(content);
         $("#largePopup").show();
         $.ajax({
-          url: "http://localhost:3000/withdraw",
+          url: "/list",
           type: "POST",
           headers: {
             ourtoken: jwtToken,
           },
-          data: {
-            fin_use_num: content,
-          },
           success: function (data) {
-            console.log(data);
+            console.log(data.res_list);
+            for (var i = 0; i < data.res_list.length; i++) {
+              $("#cardList").append();
+            }
           },
         });
+        // $.ajax({
+        //   url: "http://localhost:3000/withdraw",
+        //   type: "POST",
+        //   headers: {
+        //     ourtoken: jwtToken,
+        //   },
+        //   data: {
+        //     fin_use_num: content,
+        //   },
+        //   success: function (data) {
+        //     console.log(data);
+        //   },
+        // });
       });
       Instascan.Camera.getCameras()
         .then(function (cameras) {
