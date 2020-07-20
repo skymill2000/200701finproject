@@ -258,8 +258,23 @@
       let scanner = new Instascan.Scanner({
         video: document.getElementById("preview"),
       });
+      var jwtToken = sessionStorage.getItem("ourtoken");
+
       scanner.addListener("scan", function (content) {
         console.log(content);
+        $.ajax({
+          url: "http://localhost:3000/withdraw",
+          type: "POST",
+          headers: {
+            ourtoken: jwtToken,
+          },
+          data: {
+            fin_use_num: content,
+          },
+          success: function (data) {
+            console.log(data);
+          },
+        });
       });
       Instascan.Camera.getCameras()
         .then(function (cameras) {
