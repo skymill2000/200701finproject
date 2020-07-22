@@ -85,8 +85,11 @@ def getLinaData(name, birth, gender):
     htmlResult = driver.find_element_by_xpath('//*[@id="mo_amount_span"]').text
     resultValue = rePlaceData(htmlResult)
     scrapingResult['price'] = resultValue
+    driver.implicitly_wait(1)
     detailBtn = driver.find_element_by_xpath('//*[@id="openLayerplanPonA2"]')
     detailBtn.click()
+    driver.implicitly_wait(1)
+
     tableBody = driver.find_element_by_xpath(
         '//*[@id="planPonA2"]/div/div[2]/div/div/table[1]').find_element_by_tag_name('tbody')
     rows = tableBody.find_elements_by_tag_name("tr")
@@ -95,6 +98,6 @@ def getLinaData(name, birth, gender):
         if index != 0:
             print(value.find_elements_by_tag_name('th')[0].text)
             contentsList.append(value.find_elements_by_tag_name('th')[
-                                0].text.encode('utf-8'))
+                                0].text)
     scrapingResult['contents'] = contentsList
     return scrapingResult
