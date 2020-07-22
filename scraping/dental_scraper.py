@@ -97,5 +97,4 @@ def getLinaData(name, birth, gender):
             contentsList.append(value.find_elements_by_tag_name('th')[
                                 0].text.encode('utf-8'))
     scrapingResult['contents'] = contentsList
-    print scrapingResult
     return scrapingResult
