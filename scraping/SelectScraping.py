@@ -19,5 +19,19 @@ element5 = driver.find_element_by_xpath(
     '//*[@id="gnb_tab11"]/div/div[2]/div/div[2]/ul/li[2]/input')
 element6 = driver.find_element_by_xpath(
     '//*[@id="gnb_tab11"]/div/div[2]/div/div[2]/ul/li[4]/input')
+button = driver.find_element_by_xpath(
+    '//*[@id="gnb_tab11"]/div/div[2]/div/div[3]/button')
 
-element.select_by_visible_text('광주광역시')
+element.select_by_visible_text('전라남도')
+driver.implicitly_wait(1)
+element2.select_by_visible_text("고흥군")
+driver.implicitly_wait(1)
+element3.select_by_visible_text("고흥읍")
+driver.implicitly_wait(1)
+element4.select_by_visible_text("남계리")
+element5.send_keys('45')
+element6.send_keys('1')
+button.click()
+
+data = driver.find_element_by_xpath('//*[@id="printData3"]/tbody/tr[2]/td')
+print(data.text)
